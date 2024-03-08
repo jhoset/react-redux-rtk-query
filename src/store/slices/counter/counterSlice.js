@@ -10,7 +10,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const counterSlice = createSlice({
     name: 'counter',
     initialState: {
-        counter: 10
+        value: 10
     },
     //* Los reducers definen como cambia el estado del slice, en respuesta a acciones.
     //* Redux Toolkit, permite definir reducers de una manera mas sencilla utilizando
@@ -23,7 +23,13 @@ export const counterSlice = createSlice({
             // doesn't actually mutate the state because it uses the Immer library,
             // which detects changes to a "draft state" and produces a brand new
             // immutable state based off those changes
-            state.counter += 1
+            state.value += 1;
+        },
+        decrement: (state) => {
+            state.value -= 1;
+        },
+        incrementBy: (state, action) => {
+            state.value += action.payload
         }
     },
 })
@@ -34,4 +40,4 @@ export const counterSlice = createSlice({
 //TODO -> Estas acciones son simplemente objetos que describes un cambio que debe
 //TODO -> ocurrir en la aplicacion. (Ex. "Add new TODO", "Delete TODO")
 
-export const { increment } = counterSlice.actions;
+export const { increment, decrement, incrementBy } = counterSlice.actions;
